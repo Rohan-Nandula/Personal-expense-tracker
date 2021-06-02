@@ -124,7 +124,8 @@ def wallet():
 def dashboard():
     user = "nbalu@gmail.com"
     params="user="+user
-    data=walletBalance(params)
+    data1=walletBalance(params)
+    data=str(data1)
     print(type(data))
     if('errorType' in data):
             return render_template('Login1.html', pred="Wallet could not be updated. Your wallet balance has not changed.")
@@ -302,7 +303,7 @@ def register():
         
 @app.route("/logout")
 def logout():   
-   logout_user()        # Delete Flask-Login's session cookie       
+   #logout_user()        # Delete Flask-Login's session cookie       
    return redirect(url_for('login'))        
 
 if __name__ == "__main__":
