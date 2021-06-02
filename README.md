@@ -35,4 +35,5 @@ SUMMARY OF PROJECT ACTIVITIES
 6. Functionalities to be completed:
   a. Dynamic data integration for expense graphs(static data reflects in graph)
   b. SNS integration with expense limits
+  c. Session handling and form field validations
   
