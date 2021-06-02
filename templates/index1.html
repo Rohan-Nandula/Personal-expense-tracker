@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PET Real-Time Chart</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}">
+    
+    <script>
+            if(window.history.replaceState){
+                window.history.replaceState(null,null,window.location.href);
+            }
+    </script>
+</head>
+<body>
+<div class="page">
+    <div class="header">
+        <nav>
+            <div class="title">
+                Personal Expense Tracker
+            </div>
+            <ul class="right">
+                <li><a href="/login" class="btn-signup">Login</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <canvas id="canvas" height=100px></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--suppress JSUnresolvedLibraryURL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<!--suppress JSUnresolvedLibraryURL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!--suppress JSUnresolvedLibraryURL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<script>
+var expenseCanvas = document.getElementById("canvas");
+
+Chart.defaults.global.defaultFontFamily = "Lato";
+Chart.defaults.global.defaultFontSize = 18;
+
+var dataFirst = {
+    label: "Home Expenses",
+    data: [1000, 590, 750, 820, 200, 550, 400],
+    lineTension: 0,
+    fill: false,
+    borderColor: 'red'
+  };
+
+var dataSecond = {
+    label: "Medical Expenses",
+    data: [200, 750, 600, 600, 560, 1000, 700],
+    lineTension: 0,
+    fill: false,
+  borderColor: 'blue'
+  };
+
+var dataThird = {
+    label: "Vehicle Expenses",
+    data: [400, 715, 860, 960, 650, 530, 200],
+    lineTension: 0,
+    fill: false,
+  borderColor: 'green'
+  };
+
+var speedData = {
+  labels: ["05/12/2021", "05/15/2021", "05/19/2021", "05/22/2021", "05/27/2021", "05/29/2021", "06/01/2021"],  
+  datasets: [dataFirst, dataSecond, dataThird]
+};
+
+var chartOptions = {
+  legend: {
+    display: true,
+    position: 'top',
+    labels: {
+      boxWidth: 80,
+      fontColor: 'black'
+    }
+  }
+};
+
+var lineChart = new Chart(expenseCanvas, {
+  type: 'line',
+  data: speedData,
+  options: chartOptions
+});
+
+</script>
+</body>
+</html>
