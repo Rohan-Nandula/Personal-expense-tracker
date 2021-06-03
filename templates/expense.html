@@ -15,10 +15,10 @@
 </head>
 <body>
  <div class="page">
-        <div class="header">
+        <div class="nav">
       		<nav>
            		<div class="title">
-				   Update Personal expenses
+				   Update Personal Expenses
 			   </div>
 			   <ul class="right">
 				   <li><a href="/home" class="btn-signup">Home</a></li>
@@ -30,22 +30,24 @@
 
 		   <div class="main">
              <div class="box">
-			  		<div class="form">
+			  		
 						<div class="some">
-							 <h2>Add Expense</h2>
+							 <h2 style="color: blue;">Add Expense</h2>
 						</div>
-						<form action="{{url_for('expensepage')}}" method="POST">
-							<input type="email" name="user" value="nbalu@gmail.com" class="form-control">
-							<input type="date" name="expensedate" min="2000-01-01" max="2050-01-01" class="form-control" required>
-							<select name="expensetype" id="type" class="form-control" required>
-								<option value="medical_expenses">Medical</option>
-								<option value="vehicle_expenses">Vehicle</option>
-								<option value="home_expenses">Home</option>
-							  </select>
-							<input type="text" name="expenseamount" placeholder="Amount Paid in Rupees" class="form-control" required>
-							<button type="submit" class="btn btn-primary btn-block btn-large">Add Expense</button>
-							<a href="/home" class="btn btn-warning">Back</a>
-				 		</form>
+						<div class="form">
+							<form action="{{url_for('expensepage')}}" method="POST">
+								<input type="email" name="user" placeholder="Enter email id" required>
+								<input type="date" name="expensedate" min="01/01/2018" max="01/01/2050" required>
+								<select name="expensetype" id="type" class="form-control" required>									
+										<option value="medical_expenses">Medical</option>
+										<option value="vehicle_expenses">Vehicle</option>
+										<option value="home_expenses">Home</option>									
+								  </select>
+								<input type="text" name="expenseamount" placeholder="Expense Amount paid" required>
+								<button type="submit" class="btn btn-primary btn-block btn-large">Add Expense</button>
+								<a href="/home" class="btn btn-primary btn-block btn-large">Back</a>
+				 			</form>
+				 	    </div>
 				  </div>
 				  <div style="color:yellow">{{ pred }}</div>
 		   </div>

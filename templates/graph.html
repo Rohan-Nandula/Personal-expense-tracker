@@ -1,20 +1,6 @@
 {% extends "index.html" %}
 {% block body %}
 		<h3>Checking on graph</h3>
-		<div id={{ chartID|safe }} class="chart" style="height: 500px"></div>
-		<script>
-			var chart_id = {{ chartID|safe }}
-			var credits = {"text":"RohanPET","href":"http://personalexpensetracker.com"}
-			var series = {{ series|safe }}
-			var colors = ['#00A3E0', '#183A54', '#90ed7d', '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#8085e8', '#8d4653', '#91e8e1', '#7cb5ec', '#434348']
-			var title = {{ graphtitle|safe }}
-			var xAxis = {{ xAxis|safe }}
-			var yAxis = {{ yAxis|safe }}
-			var chart = {{ chart|safe }}
-			var subtitle = {{ subtitleText|safe }}
-		</script>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-		<script src="http://code.highcharts.com/highcharts.js"></script>
-		<script src="{{ url_for('static', filename='graph.js') }}"></script>
+		<div id={{ chartID|safe }} class="chart" style="height: 500px"></div>		
 
 {% endblock %}

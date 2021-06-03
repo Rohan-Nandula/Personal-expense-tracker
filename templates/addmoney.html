@@ -17,10 +17,11 @@
 			<div class="nav">
 					<nav>
 						<div class="title">
-						   Update YOUR WALLET
+						   Update Wallet Balance
 					   </div>
 					   <ul class="right">
 						   <li><a href="/home" class="btn-signup">Home</a></li>
+						   <li><a href="/login" class="btn-signup">Login</a></li>
 						   <li><a href="/expense" class="btn-signup">Add Expense</a></li>
 					   </ul>
 				   </nav>
@@ -33,9 +34,9 @@
                 <div class="form">
 					<form action="{{url_for('addmoneypage')}}" method="POST">
 						<h4 style="color: blue;">Email *</h4>
-						<input type="email" name="user" value=nbalu@gmail.com>
-						<h4 style="color: blue;">Add amount *</h4>
-						<input type="text" name="amount" placeholder="Enter the amount to be added" required>
+						<input type="email" name="user" placeholder="Enter email id" required>
+						<h4 style="color: blue;">Amount *</h4>
+						<input type="text" name="amount" placeholder="Enter amount to be added" required>
 						<button type="submit" class="btn btn-primary btn-block btn-large">UPDATE</button>
 						<a href="/home" class="btn btn-primary btn-block btn-large">Back</a>
 					</form>
