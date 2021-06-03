@@ -246,7 +246,7 @@ def expensepage() :
     if('errorType' in json_object):
     	return render_template('expense.html', pred="Expense could not be added. Your wallet balance has not changed.")
     else:
-    	return render_template('expense.html', pred=json_object)
+    	return render_template('expense.html', pred=str(json_object))
     	     
 	
 @app.route('/registration')
