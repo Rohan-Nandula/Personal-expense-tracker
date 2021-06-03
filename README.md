@@ -33,7 +33,7 @@ SUMMARY OF PROJECT ACTIVITIES
   d. monthly_limits - contains user set monthly limits for expenses
 
 6. Functionalities to be completed:
-  a. Dynamic data integration for expense graphs(static data reflects in graph)
+  a. Dynamic data integration for expense graphs(static data reflects in graph) ----FIXED(3/6/2021)
   b. SNS integration with expense limits
   c. Session handling and form field validations
   
