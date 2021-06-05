@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, Response
 #from flask_login import login_manager,logout_user
+from flask_mail import Mail, Message
 import requests
 import boto3
 import simplejson as json
@@ -11,6 +12,14 @@ from datetime import datetime
 #Wallet balance API: https://ss979hyehb.execute-api.ap-south-1.amazonaws.com/WalletBalance
 app = Flask(__name__)
 random.seed()  # Initialize the random number generator
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'nbs1969test@gmail.com'
+app.config['MAIL_PASSWORD'] = 'Rohnik@12'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+
+mail = Mail(app)
 
 # Function to add a specific expense for a user - AWS API Add Expense for a user
 def setExpenses(params): 
@@ -75,13 +84,41 @@ def wallet():
 def dashboard():
     user = "nbalu@gmail.com"
     params="user="+user
-    data1=walletBalance(params)
-    data=str(data1)
+    data=walletBalance(params)
     print(type(data))
+    sendSMS = False
+    sendEmail = False
+    if int(data) == 0:
+        message = "Critical!: Wallet current balance. Please add money to wallet"
+        sendSMS = True
+        sendEmail = True
+    elif int(data) < 5000:
+        message = "Warning: Wallet current balance is less than threshold limit"
+        sendSMS = True
+        sendEmail = True
+    else:
+        message = "Your current wallet balance is above threshold limit"
+    
+    # Send an SMS for case where sendSMS is true
+    phone = '8008275558'
+    if sendSMS:
+        url="https://www.fast2sms.com/dev/bulk?authorization=xCXuwWTzyjOD2ARd1EngbH3a7tKIq5PklJ8YSf0Lh4FQZecs9iNI1dSvuqprxFwCKYJXA5amQkBE36Rl&sender_id=FSTSMS&message="+message+"&language=english&route=p&numbers="+str(phone)
+        result=requests.request("GET",url)
+        print(result)
+    # Send an Email for case where sendEmail is true
+    if sendEmail:
+        if app.config['MAIL_USERNAME'] == '' or app.config['MAIL_PASSWORD'] == '':
+            print("Admin email or password is not configured.")
+        else:
+            msg = Message('Hello', sender = app.config['MAIL_USERNAME'], recipients = ['nbalas1969@gmail.com'])
+            msg.body = message
+            mail.send(msg)
+            print("Mail sent succesfully to customer!")
+
     if('errorType' in data):
             return render_template('Login1.html', pred="Wallet could not be updated. Your wallet balance has not changed.")
     else:
-            return render_template('dashboard.html', pred=data)
+            return render_template('dashboard.html', pred=data, message=message)
 
 # Function to add amount to wallet - AWS API Add money to wallet
 @app.route('/addmoneypage', methods=['GET','POST'])
@@ -103,6 +140,7 @@ def addmoneypage() :
 
 @app.route("/chart")
 def chart():
+    if request.method == "POST":
         user='nbalu@gmail.com'
         expense_date_from=''
         expense_date_to=''
